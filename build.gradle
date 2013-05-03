@@ -24,6 +24,6 @@ dependencies {
 	testCompile group: 'junit', name: 'junit', version: '4.+'
 
 	compile 'org.springframework.batch:spring-batch-core:2.1.8.RELEASE', 
-			'org.springframework:spring-jdbc:3.2.1.RELEASE', 
+			'org.springframework:spring-jdbc:3.1.2.RELEASE', 
 			'org.slf4j:slf4j-api:1.6.4'
 }
