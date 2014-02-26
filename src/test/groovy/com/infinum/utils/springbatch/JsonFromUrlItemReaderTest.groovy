@@ -15,6 +15,9 @@ class JsonFromUrlItemReaderTest {
 		assert obj2
 		
 		assert null == reader.read()
+		
+		def obj3 = reader.read()
+		assert obj3
 	}
 	
 	

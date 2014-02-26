@@ -43,10 +43,12 @@ class JsonFromUrlItemReader<T> implements ItemReader<T> {
 		if(items == null){
 			fetchFromUrl()
 		}
-		
-		if(!items?.isEmpty()) {
+	
+		if(items){
 			return items.remove(0);
 		}
+		
+		items = null
 		return null;
 	}
 
