@@ -1,12 +1,11 @@
 package com.infinum.utils.springbatch
 
 import groovy.sql.GroovyRowResult
+import groovy.util.logging.Log4j
 
 import java.sql.ResultSet
 import java.sql.SQLException
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.jdbc.core.RowMapper
 
 /**
@@ -20,13 +19,12 @@ import org.springframework.jdbc.core.RowMapper
  * To use: enter in your Batch DSL:
  * beanName(GroovyRowMapper, ClassToReturnFromMapRow)
  */
+@Log4j
 class GroovyRowMapper implements RowMapper {
 
 	GroovyRowMapper(Class mappedClass){
 		this.mappedClass = mappedClass
 	}
-	
-	Logger log = LoggerFactory.getLogger(getClass())
 	
 	private Class mappedClass
 	
