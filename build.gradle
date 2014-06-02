@@ -1,6 +1,7 @@
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
+//apply plugin: 'codenarc'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -23,8 +24,14 @@ dependencies {
 	compile 'org.codehaus.groovy:groovy-all:2.0.8'
 	testCompile group: 'junit', name: 'junit', version: '4.+'
 
-	compile 'org.springframework.batch:spring-batch-core:2.1.8.RELEASE', 
+	compile 'org.springframework.batch:spring-batch-core:2.1.9.RELEASE', 
 			'org.springframework:spring-jdbc:3.1.2.RELEASE'
 	
 	compile 'log4j:log4j:1.2.16'
 }
+
+/*codenarc {
+    configFile = file('config/codenarc/CodeNarcRules.groovy')
+    toolVersion = '0.20'
+}*/
+
