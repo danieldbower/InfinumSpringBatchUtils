@@ -1,0 +1,4 @@
+Installation Instructions:
+
+gradle compileGroovy
+gradle install
