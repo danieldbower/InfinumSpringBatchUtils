@@ -1,6 +1,24 @@
+buildscript{
+        repositories {
+            maven {
+                url 'https://build.avisoapp.com/artifactory/plugins-release'
+                credentials {
+                    username = "${artifactory_user}"
+                    password = "${artifactory_password}"
+                }
+            }
+        }
+
+        dependencies {
+            classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.1.1"
+        }
+}
+
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: "com.jfrog.artifactory"
 //apply plugin: 'codenarc'
 
 sourceCompatibility = 1.7
@@ -15,19 +33,47 @@ jar {
     }
 }
 
-repositories {
-	mavenLocal()
-	mavenCentral()
-}
-
 dependencies {
-	compile 'org.codehaus.groovy:groovy-all:2.1.9'
+	compile 'org.codehaus.groovy:groovy-all:2.0.8'
 	testCompile group: 'junit', name: 'junit', version: '4.+'
 
 	compile 'org.springframework.batch:spring-batch-core:2.2.7.RELEASE', 
 			'org.springframework:spring-jdbc:3.2.9.RELEASE'
 	
 	compile 'log4j:log4j:1.2.16'
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"
+    publish {
+        repository {
+            repoKey = 'libs-release-local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+        defaults {
+            publications('mavenJava')
+            publishArtifacts = true
+            publishPom = true
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'libs-release'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }
 
 /*codenarc {
